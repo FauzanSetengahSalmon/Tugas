@@ -63,7 +63,7 @@ fun GreetingColumn(modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
         for(name in names) {
             items(5) {
-                Greeting (name = name)
+                Greeting(name = name)
                 Spacer(modifier = Modifier.height(8.dp))
             }
             item {
