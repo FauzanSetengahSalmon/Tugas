@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Tugas2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize(),
+                Scaffold (modifier = Modifier.fillMaxSize(),
                     topBar = {
                         TopAppBar(
                             title = {
