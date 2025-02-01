@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -60,6 +62,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingColumn(modifier: Modifier = Modifier) {
     val names = listOf("Agus Lapar", "Agus Haus", "Agus Kenyang", "Agus Kerja", "Agus Hebat")
 
+    LazyRow(modifier = modifier.fillMaxSize()) {
+        for(name in names) {
+            items(5) {
+                Greeting(name = name)
+                Spacer(modifier = Modifier.width(16.dp))
+            }
+            item {
+                Spacer(modifier = Modifier.height(12.dp))
+
+            }
+        }
+    }
+
     LazyColumn(modifier = modifier.fillMaxSize()) {
         for(name in names) {
             items(5) {
@@ -67,10 +82,16 @@ fun GreetingColumn(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.height(8.dp))
             }
             item {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
+
             }
         }
     }
+}
+
+@Composable
+fun AnotherComposable() {
+    TODO("Not yet implemented")
 }
 
 @Preview(showBackground = true)
