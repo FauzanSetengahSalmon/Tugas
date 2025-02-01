@@ -25,6 +25,7 @@ fun CustomTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
+
     Column(
         modifier = modifier
     ) {

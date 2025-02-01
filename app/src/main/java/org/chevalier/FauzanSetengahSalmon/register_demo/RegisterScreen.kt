@@ -70,6 +70,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation()
         )
+
         Spacer(modifier = Modifier.height(8.dp))
         CustomTextField(
             modifier = Modifier.fillMaxWidth(),
