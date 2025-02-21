@@ -19,15 +19,17 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.lint.kotlin.metadata.Visibility
 
 @Composable
-fun RegisterScreen(modifier: Modifier = Modifier) {
+fun RegisterScreen(
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel
+) {
 
-    var username by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
-    var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    val username by viewModel.username.collectAsState()
+    val email by viewModel.email.collectAsState()
+    val password by viewModel.password.collectAsState()
+    val passwordVisible by viewModel.passwordVisible.collectAsState()
 
     Column(
         modifier = Modifier
@@ -57,7 +59,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             hint = "Buat Username",
             value = username,
             onValueChange = { text ->
-                username = text
+                viewModel.updateUsername(text)
             },
             leadingIcon = {
                 Icon(
@@ -65,10 +67,6 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                     contentDescription = "Username"
                 )
             },
-            trailingIcon = {
-
-            },
-            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation()
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -78,7 +76,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             hint = "Masukkan Email",
             value = email,
             onValueChange = { text ->
-                email = text
+                viewModel.updateEmail(text)
             },
             leadingIcon = {
                 Icon(
@@ -86,10 +84,6 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                     contentDescription = "Email"
                 )
             },
-            trailingIcon = {
-
-            },
-            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.height(8.dp))
         CustomTextField(
@@ -98,7 +92,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             hint = "Masukkan password anda",
             value = password,
             onValueChange = { text ->
-                password = text
+                viewModel.updatePassword(text)
             },
             leadingIcon = {
                 Icon(
@@ -107,7 +101,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                 )
             },
             trailingIcon = {
-                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                IconButton(onClick = { viewModel.togglePasswordVisibility() }) {
                     Icon(
                         imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
                         contentDescription = if (passwordVisible) "Hide password" else "Show password"
@@ -119,7 +113,9 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             modifier = Modifier.fillMaxWidth(),
-            onClick = { },
+            onClick = {
+                viewModel.register(username, email, password)
+            },
             colors = ButtonDefaults.buttonColors(containerColor = androidx.compose.ui.graphics.Color(0xFFBB86FC))
         ) {
             Text(text = "Register")
@@ -131,6 +127,6 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
 @Composable
 fun RegisterScreenPreview() {
     Tugas2Theme {
-        RegisterScreen()
+        RegisterScreen(viewModel = MainViewModel())
     }
 }

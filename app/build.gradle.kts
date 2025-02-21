@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.lifecycle.viewmodel.compose) // dependency viewmodel compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -49,6 +50,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation("androidx.compose.material:material-icons-extended:1.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    testImplementation(kotlin("test"))
     implementation(libs.androidx.animation.core.lint)
 
     testImplementation(libs.junit)
